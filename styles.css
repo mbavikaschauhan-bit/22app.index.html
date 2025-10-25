@@ -1,0 +1,1236 @@
+            /* Prevent flash of content - must be first */
+            #auth-container, #app-container {
+                display: none !important;
+                opacity: 0;
+                transition: opacity 0.2s ease-in-out;
+            }
+
+            #auth-container.show, #app-container.show {
+                display: flex !important;
+                opacity: 1;
+            }
+
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #2c333a;
+            --text-muted: #3e444a;
+            --border-color: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent-color: #007bff;
+            --chart-text: #212529; /* Chart text color for light theme */
+            
+            /* Tooltip Variables - Dark theme for all tooltips */
+            --tooltip-bg: #111827;
+            --tooltip-text: #ffffff;
+            --tooltip-border: rgba(255, 255, 255, 0.06);
+            --tooltip-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0d1b2a;
+            --bg-secondary: #1b263b;
+            --bg-tertiary: #404040;
+            --text-primary: #ffffff; /* Brighter */
+            --text-secondary: #d1d5db; /* Brighter */
+            --text-muted: #d1d5db; /* Brighter for better contrast */
+            --border-color: #555555;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --accent-color: #00d4aa;
+            --chart-text: #ffffff; /* Chart text color for dark theme */
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Removed transitions to prevent flicker during theme switching */
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        /* Chart-specific styles for better theme integration */
+        /* Removed canvas transitions to prevent flicker during theme switching */
+
+        /* Ensure chart tooltips use theme colors */
+        .chartjs-tooltip {
+            color: var(--chart-text) !important;
+        }
+
+        /* Global Tooltip Styling - Force dark theme for all tooltips */
+        .chartjs-tooltip,
+        .apexcharts-tooltip,
+        .recharts-tooltip-wrapper,
+        .echarts-tooltip,
+        [class*="tooltip"],
+        [id*="tooltip"] {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+            border-radius: 6px !important;
+        }
+
+        /* Chart.js specific tooltip overrides */
+        .chartjs-tooltip {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+        }
+
+        /* ApexCharts tooltip overrides */
+        .apexcharts-tooltip {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+        }
+
+        .apexcharts-tooltip .apexcharts-tooltip-title {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border-bottom: 1px solid var(--tooltip-border) !important;
+        }
+
+        .apexcharts-tooltip .apexcharts-tooltip-series-group {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+        }
+
+        /* Recharts tooltip overrides */
+        .recharts-tooltip-wrapper {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+        }
+
+        .recharts-tooltip-wrapper .recharts-tooltip-label {
+            color: var(--tooltip-text) !important;
+        }
+
+        .recharts-tooltip-wrapper .recharts-tooltip-item {
+            color: var(--tooltip-text) !important;
+        }
+
+        /* ECharts tooltip overrides */
+        .echarts-tooltip {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+        }
+
+        /* Custom tooltip container for accessibility */
+        #chartjs-custom-tooltip {
+            background: var(--tooltip-bg) !important;
+            color: var(--tooltip-text) !important;
+            border: 1px solid var(--tooltip-border) !important;
+            box-shadow: var(--tooltip-shadow) !important;
+            border-radius: 6px !important;
+            padding: 8px 12px !important;
+            font-size: 12px !important;
+            font-family: 'Inter', sans-serif !important;
+            pointer-events: none !important;
+            z-index: 1000 !important;
+            position: absolute !important;
+            opacity: 0 !important;
+            transition: opacity 0.2s ease !important;
+            max-width: 200px !important;
+            word-wrap: break-word !important;
+        }
+
+        #chartjs-custom-tooltip.show {
+            opacity: 1 !important;
+        }
+
+        /* External tooltip content styling */
+        #chartjs-custom-tooltip .tooltip-title {
+            font-weight: bold;
+            font-size: 13px;
+            margin-bottom: 4px;
+            color: var(--tooltip-text) !important;
+        }
+
+        #chartjs-custom-tooltip .tooltip-body {
+            font-size: 12px;
+            margin-bottom: 2px;
+            color: var(--tooltip-text) !important;
+        }
+
+        #chartjs-custom-tooltip .tooltip-color {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            /* blue-500 */
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .nav-item {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .nav-item.active {
+            background-color: #3b82f6;
+            /* blue-500 */
+            color: white;
+            border-radius: 0.5rem;
+        }
+
+        .nav-item:not(.active):hover {
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .nav-item.active svg, .nav-item.active i {
+             stroke: white;
+             color: white; /* Added for the Rupee icon */
+        }
+        
+        /* For Webkit browsers */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #94a3b8;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background-color: #475569;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0;
+ transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0);
+ }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg);
+ }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: text-bottom;
+            border: 0.15em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spin .75s linear infinite;
+        }
+
+        .page.active {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+        
+        .calendar-day {
+            min-height: 100px;
+        }
+        
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 250px;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            color: white;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast-success { background-color: #22c55e;
+ }
+        .toast-error { background-color: #ef4444;
+ }
+        .toast-info { background-color: #3b82f6;
+ }
+        
+        /* --- Colorful Icons --- */
+        .nav-item:not(.active) .feather-home { stroke: #3b82f6; /* blue-500 */ }
+        .nav-item:not(.active) .feather-plus-circle { stroke: #22c55e; /* green-500 */ }
+        .nav-item:not(.active) .feather-calendar { stroke: #8b5cf6; /* violet-500 */ }
+        .nav-item:not(.active) .feather-list { stroke: #6366f1; /* indigo-500 */ }
+        .nav-item:not(.active) .feather-bar-chart-2 { stroke: #f97316; /* orange-500 */ }
+        .nav-item:not(.active) .feather-file-text { stroke: #0ea5e9; /* sky-500 */ }
+        .nav-item:not(.active) .feather-user { stroke: #64748b; /* slate-500 */ }
+        .nav-item:not(.active) .feather-award { stroke: #f59e0b; /* amber-500 */ }
+        
+        /* Special case for the Rupee symbol which is not a feather icon */
+        .nav-item[data-page="fund-management"]:not(.active) i { color: #10b981; /* emerald-500 */ }
+
+        /* Light background for weekday headers (Sun–Sat) */
+        .weekday-header {
+          background-color: #f5f5f5 !important;
+          border: 2px solid #ccc !important; /* stronger outline */
+          color: #333;
+          border-radius: 6px;
+        }
+
+        /* Light background + visible outline for date boxes */
+        .date-box {
+          background-color: #fafafa !important;
+          border: 2px solid #bbb !important; /* more visible border */
+          border-radius: 6px;
+          position: relative; /* For popup positioning */
+          transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .date-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px var(--shadow);
+            z-index: 10;
+        }
+        
+        .date-box.has-trades {
+            cursor: pointer;
+        }
+
+        /* Light background + visible outline for weekly summary boxes */
+        .week-summary {
+          background-color: #fafafa !important;
+          border: 2px solid #bbb !important; /* match date-box border */
+          border-radius: 6px; /* match date-box border-radius */
+          padding: 8px;
+          position: relative;
+          transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Weekly summary amount styling to prevent touching corners */
+        .week-summary .amount-text {
+          padding: 4px 6px;
+          word-break: break-all;
+          line-height: 1.2;
+          font-size: 0.875rem;
+          overflow-wrap: break-word;
+          hyphens: auto;
+        }
+
+        /* Brighter Calendar Text */
+        .weekday-header {
+            font-weight: 600;
+        }
+        .date-box .date-number {
+            font-weight: 600;
+            font-size: 0.875rem; /* 14px */
+            color: var(--text-primary);
+        }
+        .week-summary .week-label {
+            font-weight: 600;
+            font-size: 0.875rem; /* 14px */
+            color: var(--text-secondary);
+        }
+
+        /* Dark Theme Overrides for Calendar Visibility */
+        [data-theme="dark"] .weekday-header {
+            background-color: #2a3a4b !important;
+            border-color: #4a5a6b !important;
+            color: #e5e7eb; /* Brighter text for dark mode */
+        }
+        [data-theme="dark"] .date-box {
+            background-color: #1b263b !important;
+            border-color: #444 !important;
+        }
+        [data-theme="dark"] .week-summary {
+            background-color: #1b263b !important;
+            border-color: #444 !important;
+        }
+        [data-theme="dark"] .date-box .date-number,
+        [data-theme="dark"] .week-summary .week-label {
+             color: #f9fafb;
+        }
+
+        /* Profit/Loss text inside date boxes */
+        .date-box .pl-amount {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        /* Green for profit */
+        .date-box .pl-amount.profit {
+            color: #2e7d32;
+        }
+
+        /* Red for loss */
+        .date-box .pl-amount.loss {
+            color: #c62828;
+        }
+        
+        /* Large modal popup */
+        .trade-details-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 95%;
+            max-width: 600px;
+            min-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: var(--text-primary); /* Default text color for dark modal */
+            background-color: #1e293b; /* Dark background from image */
+        }
+        
+        [data-theme="light"] .trade-details-modal {
+             background-color: var(--bg-primary);
+             color: var(--text-primary);
+        }
+        
+        /* Calendar date hover effects */
+        .calendar-date-cell {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .calendar-date-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+        
+        .calendar-date-cell.has-trades {
+            position: relative;
+        }
+        
+        .calendar-date-cell.has-trades::after {
+            content: 'Click to view details';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 20;
+        }
+        
+        .calendar-date-cell.has-trades:hover::after {
+            opacity: 1;
+        }
+        
+        .trade-details-modal .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #334155;
+        }
+        
+        /* Fix header and sidebar to stay at top */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            z-index: 30 !important;
+        }
+        
+        #sidebar {
+            position: fixed !important;
+            top: 65px !important;
+            z-index: 40 !important;
+        }
+        
+        /* Mobile sidebar positioning */
+        @media (max-width: 767px) {
+            #sidebar {
+                top: 64px !important;
+                height: calc(100vh - 64px) !important;
+                z-index: 55 !important;
+            }
+            header {
+                z-index: 60 !important;
+            }
+            #main-content {
+                z-index: 50 !important;
+            }
+        }
+        
+        /* Ensure main content doesn't overlap with fixed header */
+        @media (min-width: 768px) {
+            #main-content {
+                margin-left: 16rem;
+            }
+        }
+        
+        [data-theme="light"] .trade-details-modal .modal-header {
+            border-bottom-color: var(--border-color);
+        }
+
+        .trade-details-modal .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 4px;
+            color: var(--text-muted);
+        }
+
+        .trade-details-modal .modal-content {
+            padding: 1.25rem;
+        }
+        
+        .modal-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .stat-card {
+            background-color: #334155; /* Card background from image */
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        [data-theme="light"] .stat-card {
+            background-color: var(--bg-secondary);
+        }
+
+        .stat-card-label {
+            font-size: 0.875rem;
+            color: var(--text-muted); /* Muted text color from image */
+        }
+        [data-theme="light"] .stat-card-label { color: var(--text-muted); }
+
+        .stat-card-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .stat-card-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .trades-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        .trades-table th, .trades-table td {
+            padding: 0.75rem 0.5rem;
+            text-align: left;
+            font-size: 0.875rem;
+            word-wrap: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Column-specific alignment */
+        .trades-table th:nth-child(1), .trades-table td:nth-child(1) { text-align: left; } /* Symbol */
+        .trades-table th:nth-child(2), .trades-table td:nth-child(2) { text-align: center; } /* Side */
+        .trades-table th:nth-child(3), .trades-table td:nth-child(3) { text-align: center; } /* Size */
+        .trades-table th:nth-child(4), .trades-table td:nth-child(4) { text-align: right; } /* Entry */
+        .trades-table th:nth-child(5), .trades-table td:nth-child(5) { text-align: right; } /* Exit */
+        .trades-table th:nth-child(6), .trades-table td:nth-child(6) { text-align: right; } /* P&L */
+        
+        /* Edit Trade Modal Styles */
+        #edit-trade-modal .modal-overlay {
+            z-index: 1001; /* Higher than trade details modal */
+        }
+
+        #edit-trade-modal .w-full {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        #edit-trade-modal .max-h-48 {
+            max-height: 40vh;
+        }
+
+        #edit-trade-modal input,
+        #edit-trade-modal textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #edit-trade-modal input:focus,
+        #edit-trade-modal textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        #edit-trade-modal .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            transition: background-color 0.2s ease;
+        }
+
+        #edit-trade-modal .btn-primary:hover:not(:disabled) {
+            background-color: #2563eb;
+        }
+
+        #edit-trade-modal .btn-primary:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        #edit-trade-modal .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Ultra compact modal styling */
+        #edit-trade-modal .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        #edit-trade-modal .grid {
+            gap: 0.5rem;
+        }
+
+        #edit-trade-modal button {
+            font-size: 0.875rem;
+        }
+
+        #edit-trade-modal .text-xs {
+            font-size: 0.875rem;
+        }
+
+        #edit-trade-modal input,
+        #edit-trade-modal textarea {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            height: 2rem;
+        }
+
+        #edit-trade-modal textarea {
+            height: auto;
+            min-height: 2rem;
+        }
+
+        #edit-trade-modal label {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .trade-details-modal {
+                width: 98%;
+                max-width: none;
+                margin: 1rem;
+            }
+            
+            #edit-trade-modal .w-full {
+                width: 95%;
+                max-width: none;
+                margin: 0.5rem;
+            }
+            
+            .trades-table th, .trades-table td {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.75rem;
+            }
+            
+            .trades-table th:nth-child(1), .trades-table td:nth-child(1) { width: 20%; text-align: left; } /* Symbol */
+            .trades-table th:nth-child(2), .trades-table td:nth-child(2) { width: 10%; text-align: center; } /* Side */
+            .trades-table th:nth-child(3), .trades-table td:nth-child(3) { width: 10%; text-align: center; } /* Size */
+            .trades-table th:nth-child(4), .trades-table td:nth-child(4) { width: 20%; text-align: right; } /* Entry */
+            .trades-table th:nth-child(5), .trades-table td:nth-child(5) { width: 20%; text-align: right; } /* Exit */
+            .trades-table th:nth-child(6), .trades-table td:nth-child(6) { width: 20%; text-align: right; } /* P&L */
+        }
+        .trades-table th:nth-child(1), .trades-table td:nth-child(1) { width: 18%; } /* Symbol */
+        .trades-table th:nth-child(2), .trades-table td:nth-child(2) { width: 12%; } /* Side */
+        .trades-table th:nth-child(3), .trades-table td:nth-child(3) { width: 12%; } /* Size */
+        .trades-table th:nth-child(4), .trades-table td:nth-child(4) { width: 18%; } /* Entry */
+        .trades-table th:nth-child(5), .trades-table td:nth-child(5) { width: 18%; } /* Exit */
+        .trades-table th:nth-child(6), .trades-table td:nth-child(6) { width: 22%; } /* P&L */
+        .trades-table thead {
+             border-bottom: 1px solid #334155;
+        }
+        [data-theme="light"] .trades-table thead { border-bottom-color: var(--border-color); }
+        
+        /* Sticky header for trade history table */
+        .trades-table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: var(--bg-secondary);
+        }
+        
+        /* Sticky header for all tables */
+        table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Ensure table containers support sticky positioning */
+        .overflow-x-auto {
+            position: relative;
+        }
+        
+        /* Specific fix for trade history table */
+        #trade-history .overflow-x-auto {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        /* Specific fix for statement table */
+        #trade-statement .overflow-x-auto {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        /* Force sticky headers to work */
+        #trade-history table thead th,
+        #trade-statement table thead th {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 100 !important;
+            background-color: var(--bg-secondary) !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        
+        .trades-table th {
+            color: var(--text-muted);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        [data-theme="light"] .trades-table th { color: var(--text-muted); }
+
+        .trades-table tbody tr:not(:last-child) {
+            border-bottom: 1px solid #334155;
+        }
+        [data-theme="light"] .trades-table tbody tr:not(:last-child) { border-bottom-color: var(--border-color); }
+
+        /* CSV Upload Styles */
+        #csv-drop-zone {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        #csv-drop-zone:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--accent-color);
+        }
+
+        #csv-drop-zone.dragover {
+            background-color: var(--bg-secondary);
+            border-color: var(--accent-color);
+            border-style: solid;
+        }
+
+        .csv-error {
+            color: #ef4444;
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .csv-success {
+            color: #10b981;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* New Add Trade Form Styles */
+        .form-btn-group button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        .form-btn-group button:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--accent-color);
+        }
+        .form-btn-group button.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+         [data-theme="dark"] .form-btn-group button.active {
+             color: #0d1b2a;
+         }
+
+        /* Direction Button Styles */
+        #direction-group button {
+            background-color: #f0f0f0; /* Lighter grey for better text contrast */
+            color: #333;
+            border: 1px solid #ccc;
+            transition: all 0.2s ease;
+        }
+        #direction-group button.active-long {
+            background-color: #22c55e !important; /* Bright Green */
+            color: white !important;
+            border-color: #16a34a !important;
+            box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+        }
+        #direction-group button.active-short {
+            background-color: #ef4444 !important; /* Bright Red */
+            color: white !important;
+            border-color: #dc2626 !important;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+        }
+        #direction-group button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Segment & Style Button Styles */
+        #segment-group button,
+        #trading-style-group button {
+            background-color: #d3d3d3;
+            color: #333;
+            border: 1px solid #bbb;
+        }
+        #segment-group button.active-green,
+        #trading-style-group button.active-green {
+            background-color: #006400;
+            color: white;
+            border-color: #005000;
+        }
+
+        /* Date Filter Styles */
+        #dateFilter, #startDate, #endDate {
+            transition: all 0.2s ease-in-out;
+        }
+
+        #dateFilter:focus, #startDate:focus, #endDate:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+
+        
+        /* Info Tooltip Styles */
+        .info-tooltip {
+            pointer-events: none;
+            word-wrap: break-word;
+            white-space: normal;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+        
+        .info-tooltip-trigger:hover + .info-tooltip,
+        .info-tooltip-trigger:focus + .info-tooltip {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+        
+        .info-tooltip.show {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure tooltip trigger has proper hover state */
+        .info-tooltip-trigger:hover {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        /* Trade History Action Icons and Menu Styles */
+        .action-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            color: var(--text-secondary);
+            vertical-align: middle;
+        }
+        
+        .action-icon:hover {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .exit-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .exit-btn:hover {
+            background-color: var(--bg-secondary);
+        }
+        
+        .overflow-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+            min-width: 140px;
+            padding: 4px 0;
+        }
+        
+        [data-theme="dark"] .overflow-menu {
+            background: var(--bg-primary);
+            border-color: var(--border-color);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: background-color 0.2s ease;
+        }
+        
+        .menu-item:hover {
+            background-color: var(--bg-secondary);
+        }
+        
+        .menu-item svg {
+            flex-shrink: 0;
+        }
+        
+        /* Ensure actions column content is aligned in one line */
+        .actions-cell {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        /* Responsive tooltip positioning */
+        @media (max-width: 640px) {
+            .info-tooltip {
+                left: 0 !important;
+                transform: none !important;
+                margin-left: 0 !important;
+                width: 280px !important;
+                max-width: calc(100vw - 2rem);
+            }
+            
+            .info-tooltip .absolute {
+                left: 1rem !important;
+                transform: none !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .info-tooltip {
+                width: 240px !important;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Account Balance Chart Filter Buttons */
+        #balance-filter-week:hover,
+        #balance-filter-month:hover,
+        #balance-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #balance-filter-week.active,
+        #balance-filter-month.active,
+        #balance-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for balance filter buttons */
+        @media (max-width: 640px) {
+            #balance-filter-week,
+            #balance-filter-month,
+            #balance-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Equity Curve Chart Filter Buttons */
+        #equity-filter-week:hover,
+        #equity-filter-month:hover,
+        #equity-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #equity-filter-week.active,
+        #equity-filter-month.active,
+        #equity-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for equity filter buttons */
+        @media (max-width: 640px) {
+            #equity-filter-week,
+            #equity-filter-month,
+            #equity-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Daily P&L Chart Filter Buttons */
+        #dailyPnl-filter-week:hover,
+        #dailyPnl-filter-month:hover,
+        #dailyPnl-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #dailyPnl-filter-week.active,
+        #dailyPnl-filter-month.active,
+        #dailyPnl-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for Daily P&L filter buttons */
+        @media (max-width: 640px) {
+            #dailyPnl-filter-week,
+            #dailyPnl-filter-month,
+            #dailyPnl-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Daily Win Rate Chart Filter Buttons */
+        #dailyWinRate-filter-week:hover,
+        #dailyWinRate-filter-month:hover,
+        #dailyWinRate-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #dailyWinRate-filter-week.active,
+        #dailyWinRate-filter-month.active,
+        #dailyWinRate-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for Daily Win Rate filter buttons */
+        @media (max-width: 640px) {
+            #dailyWinRate-filter-week,
+            #dailyWinRate-filter-month,
+            #dailyWinRate-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Monthly Performance Chart Filter Buttons */
+        #monthly-performance-filter-month:hover,
+        #monthly-performance-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #monthly-performance-filter-month.active,
+        #monthly-performance-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for Monthly Performance filter buttons */
+        @media (max-width: 640px) {
+            #monthly-performance-filter-month,
+            #monthly-performance-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Monthly Commission/Charges Chart Filter Buttons */
+        #monthly-commission-filter-month:hover,
+        #monthly-commission-filter-all:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        #monthly-commission-filter-month.active,
+        #monthly-commission-filter-all.active {
+            background-color: var(--accent-color, #3b82f6) !important;
+            color: white !important;
+            border-color: var(--accent-color, #3b82f6) !important;
+        }
+
+        /* Mobile responsiveness for Monthly Commission/Charges filter buttons */
+        @media (max-width: 640px) {
+            #monthly-commission-filter-month,
+            #monthly-commission-filter-all {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+        
+        /* Connection Status Styles */
+        .connection-status {
+            transition: all 0.3s ease;
+            border-radius: 9999px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid transparent;
+        }
+        
+        .connection-status.connected {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #047857;
+        }
+        
+        .connection-status.connected .w-2 {
+            background-color: #34d399;
+            box-shadow: 0 0 4px rgba(52, 211, 153, 0.4);
+        }
+        
+        .connection-status.disconnected {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-color: #b91c1c;
+        }
+        
+        .connection-status.disconnected .w-2 {
+            background-color: #f87171;
+            box-shadow: 0 0 4px rgba(248, 113, 113, 0.4);
+        }
+        
+        .connection-status.unknown {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            color: white;
+            border-color: #374151;
+        }
+        
+        .connection-status.unknown .w-2 {
+            background-color: #9ca3af;
+            box-shadow: 0 0 4px rgba(156, 163, 175, 0.4);
+        }
+        
+        .connection-status .w-2 {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
